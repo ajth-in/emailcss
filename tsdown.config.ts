@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite-plus/pack'
+import { defineConfig } from "vite-plus/pack";
 
 export default defineConfig({
   dts: {
@@ -6,4 +6,4 @@ export default defineConfig({
   },
   exports: true,
   // ...config options
-})
+});
