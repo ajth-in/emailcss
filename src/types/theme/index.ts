@@ -1,6 +1,5 @@
 export * from "./token";
 export * from "./data";
-export * from "./condition";
 export * from "./selector";
 export * from "./style";
 export * from "./text";

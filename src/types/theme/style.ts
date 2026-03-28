@@ -1,15 +1,10 @@
 import type { Selectors, AnySelector } from "./selector";
-import type { Condition, ConditionalValue } from "./condition";
 
-export type Nested<P> =
-  | (P & {
-      [K in Selectors]?: Nested<P>;
-    } & {
-      [K in AnySelector]?: Nested<P>;
-    })
-  | {
-      [K in Condition]?: Nested<P>;
-    };
+export type Nested<P> = P & {
+  [K in Selectors]?: Nested<P>;
+} & {
+  [K in AnySelector]?: Nested<P>;
+};
 
 export type CssProperties = Record<string, any>;
 
@@ -20,7 +15,7 @@ export interface CssKeyframes {
 }
 
 export type CssVarProperties = {
-  [key in `--${string}`]?: ConditionalValue<string | number>;
+  [key in `--${string}`]?: string | number;
 };
 
 export type SystemStyleObject = Nested<Record<string, any> & CssVarProperties>;
