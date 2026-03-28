@@ -1,6 +1,6 @@
-import type { ConditionalValue } from "./condition";
-import type { TokenDataTypes } from "./data";
-import { defaultTheme } from "./default";
+import type { ConditionalValue } from "./theme/condition";
+import type { TokenDataTypes } from "./theme/data";
+import { defaultTheme } from "./theme/default";
 
 type DefaultTokens = typeof defaultTheme.tokens;
 
