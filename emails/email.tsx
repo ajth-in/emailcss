@@ -84,7 +84,7 @@ export default function AWSVerifyEmail({ verificationCode }: AWSVerifyEmailProps
 
                 <Text
                   style={css({
-                    color: "gray.800",
+                    color: "brand.blue",
                     fontSize: "code",
                     marginY: "10px",
                     marginX: "0",

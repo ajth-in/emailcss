@@ -21,4 +21,10 @@ export interface Config {
    * @default "warn"
    */
   validationMode?: ValidationMode;
+
+  /**
+   * Whether to only allow tokens for properties that support them.
+   * @default false
+   */
+  strictTokens?: boolean;
 }
