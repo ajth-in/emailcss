@@ -1,6 +1,7 @@
 import type { Config } from "../types/config";
 import { canIEmailCSSProperties } from "../can-i-email/maps/properties";
 import { canIEmailCSSFunctions } from "../can-i-email/maps/functions";
+import { canIEmailCSSUnits } from "../can-i-email/maps/units";
 import { CompatibilityError } from "../exceptions/compatibility-error";
 import type { ProcessedItem } from "../can-i-email";
 import * as c from "../utils/console-colors";
@@ -8,6 +9,7 @@ import { camelToKebab } from "../utils/camel-to-kebab";
 
 const propertiesMap = canIEmailCSSProperties as Record<string, ProcessedItem>;
 const functionsMap = canIEmailCSSFunctions as Record<string, ProcessedItem>;
+const unitsMap = canIEmailCSSUnits as Record<string, ProcessedItem>;
 
 type ValidationCache = {
   reportedProps: Set<string>;
@@ -61,6 +63,24 @@ export const reportValidity = <T extends Config>(
       }
     }
   }
+
+  const unitMatches = value.matchAll(/(?:\d*\.?\d+)(%|[a-z]+)/g);
+  for (const match of unitMatches) {
+    const unit = match[1];
+    const cacheKey = `unit:${unit}`;
+
+    if (config.__cache.reportedProps.has(cacheKey)) continue;
+
+    const data = unitsMap[unit];
+    if (data) {
+      const score =
+        data.coverage.support + (thresholdConfig.includePartialSupport ? data.coverage.partial : 0);
+      if (score < thresholdConfig.threshold) {
+        reportItem(mode, unit, score, thresholdConfig.threshold, data, c.green);
+        config.__cache.reportedProps.add(cacheKey);
+      }
+    }
+  }
 };
 
 function reportItem(
@@ -82,6 +102,6 @@ function reportItem(
   if (mode === "error") {
     throw new CompatibilityError(message);
   } else if (mode === "warn") {
-    console.warn(`✸ ${message}`);
+    console.warn(`${c.bold(c.red("[INVALID]"))} ${message}`);
   }
 }
