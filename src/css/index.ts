@@ -1,8 +1,22 @@
 import type { Config } from "../types/config";
 import type { SystemProperties } from "../types/style-props";
-import { propertyCategoryMap } from "./property-cat-map";
+import { propsToType } from "../can-i-email/maps/props-to-type";
+import { camelToKebab } from "../utils/camel-to-kebab";
 import { reportValidity } from "./report-validity";
 import { resolveToken } from "./resolve-token";
+
+const typeCategoryMap = propsToType as Record<string, string>;
+
+const SHORTHANDS: Record<string, { expansion: string[]; category: string }> = {
+  marginX: { expansion: ["marginLeft", "marginRight"], category: "spacing" },
+  marginY: { expansion: ["marginTop", "marginBottom"], category: "spacing" },
+  paddingX: { expansion: ["paddingLeft", "paddingRight"], category: "spacing" },
+  paddingY: { expansion: ["paddingTop", "paddingBottom"], category: "spacing" },
+  borderTopRadius: { expansion: ["borderTopLeftRadius", "borderTopRightRadius"], category: "radii" },
+  borderRightRadius: { expansion: ["borderTopRightRadius", "borderBottomRightRadius"], category: "radii" },
+  borderBottomRadius: { expansion: ["borderBottomLeftRadius", "borderBottomRightRadius"], category: "radii" },
+  borderLeftRadius: { expansion: ["borderTopLeftRadius", "borderBottomLeftRadius"], category: "radii" },
+};
 
 export const css =
   <T extends Config>(config: T) =>
@@ -13,34 +27,17 @@ export const css =
       reportValidity(config, prop, value);
       if (value === undefined || value === null) return;
 
-      if (prop === "marginX") {
-        resolvedStyles.marginLeft = resolveToken(config, "spacing", value as string);
-        resolvedStyles.marginRight = resolveToken(config, "spacing", value as string);
-      } else if (prop === "marginY") {
-        resolvedStyles.marginTop = resolveToken(config, "spacing", value as string);
-        resolvedStyles.marginBottom = resolveToken(config, "spacing", value as string);
-      } else if (prop === "paddingX") {
-        resolvedStyles.paddingLeft = resolveToken(config, "spacing", value as string);
-        resolvedStyles.paddingRight = resolveToken(config, "spacing", value as string);
-      } else if (prop === "paddingY") {
-        resolvedStyles.paddingTop = resolveToken(config, "spacing", value as string);
-        resolvedStyles.paddingBottom = resolveToken(config, "spacing", value as string);
-      } else if (prop === "borderTopRadius") {
-        resolvedStyles.borderTopLeftRadius = resolveToken(config, "radii", value as string);
-        resolvedStyles.borderTopRightRadius = resolveToken(config, "radii", value as string);
-      } else if (prop === "borderRightRadius") {
-        resolvedStyles.borderTopRightRadius = resolveToken(config, "radii", value as string);
-        resolvedStyles.borderBottomRightRadius = resolveToken(config, "radii", value as string);
-      } else if (prop === "borderBottomRadius") {
-        resolvedStyles.borderBottomLeftRadius = resolveToken(config, "radii", value as string);
-        resolvedStyles.borderBottomRightRadius = resolveToken(config, "radii", value as string);
-      } else if (prop === "borderLeftRadius") {
-        resolvedStyles.borderTopLeftRadius = resolveToken(config, "radii", value as string);
-        resolvedStyles.borderBottomLeftRadius = resolveToken(config, "radii", value as string);
-      } else {
-        const category = propertyCategoryMap[prop];
-        resolvedStyles[prop] = category ? resolveToken(config, category, value as string) : value;
+      const shorthand = SHORTHANDS[prop];
+      if (shorthand) {
+        shorthand.expansion.forEach((targetProp) => {
+          resolvedStyles[targetProp] = resolveToken(config, shorthand.category, value as string);
+        });
+        return;
       }
+
+      const kebabProp = camelToKebab(prop);
+      const category = typeCategoryMap[kebabProp];
+      resolvedStyles[prop] = category ? resolveToken(config, category, value as string) : value;
     });
 
     return resolvedStyles;
