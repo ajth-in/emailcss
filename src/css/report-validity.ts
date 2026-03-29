@@ -1,7 +1,7 @@
 import type { Config } from "../types/config";
 import { canIEmailCSSProperties } from "../can-i-email/maps/properties";
 import { CompatibilityError } from "../exceptions/compatibility-error";
-import type { ProcessedItem } from "../scripts/can-i-email";
+import type { ProcessedItem } from "../can-i-email";
 import * as c from "../utils/console-colors";
 import { camelToKebab } from "../utils/camel-to-kebab";
 

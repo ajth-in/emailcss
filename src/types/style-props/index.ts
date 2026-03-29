@@ -15,7 +15,7 @@ export interface SystemProperties<T = any> {
    * @not_supported 84.78%
    * @deprecated poor support coverage. This property might not work as expected in many email clients.
    */
-  accentColor?: AnyString;
+  accentColor?: PropertyValue<T, "colors">;
   /**
    * @see https://www.caniemail.com/features/css-align-items/
    * @slug css-align-items
@@ -150,13 +150,12 @@ export interface SystemProperties<T = any> {
    */
   blockSize?: AnyString;
   /**
-   * Defines the horizontal or vertical size of an element's block, depending on its writing mode.
-   * @see https://www.caniemail.com/features/css-block-inline-size/
-   * @slug css-block-inline-size
-   * @last_test_date 2022-07-14
-   * @support 48.98%
+   * @see https://www.caniemail.com/features/css-inline-size/
+   * @slug css-inline-size
+   * @last_test_date 2019-02-28
+   * @support 41.67%
    * @partial 0.00%
-   * @not_supported 51.02%
+   * @not_supported 58.33%
    */
   inlineSize?: AnyString;
   /**
@@ -1191,4 +1190,382 @@ export interface SystemProperties<T = any> {
    * @not_supported 22.92%
    */
   zIndex?: PropertyValue<T, "zIndex">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  backgroundPositionX?: AnyString;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  backgroundPositionY?: AnyString;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  backgroundRepeatX?: AnyString;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  backgroundRepeatY?: AnyString;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  backgroundAttachment?: AnyString;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  backgroundComposite?: AnyString;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  borderWidth?: PropertyValue<T, "borderWidths">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  borderStyle?: AnyString;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  borderColor?: PropertyValue<T, "colors">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  borderTopRadius?: PropertyValue<T, "radii">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  borderRightRadius?: PropertyValue<T, "radii">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  borderBottomRadius?: PropertyValue<T, "radii">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  borderLeftRadius?: PropertyValue<T, "radii">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  top?: PropertyValue<T, "spacing">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  bottom?: PropertyValue<T, "spacing">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  left?: PropertyValue<T, "spacing">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  right?: PropertyValue<T, "spacing">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  flex?: AnyString;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  flexDirection?: AnyString;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  gap?: PropertyValue<T, "spacing">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  columnGap?: PropertyValue<T, "spacing">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  rowGap?: PropertyValue<T, "spacing">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  pointerEvents?: AnyString;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  width?: PropertyValue<T, "sizes">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  height?: PropertyValue<T, "sizes">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  minWidth?: PropertyValue<T, "sizes">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  minHeight?: PropertyValue<T, "sizes">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  maxHeight?: PropertyValue<T, "sizes">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  marginTop?: PropertyValue<T, "spacing">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  marginRight?: PropertyValue<T, "spacing">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  marginBottom?: PropertyValue<T, "spacing">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  marginLeft?: PropertyValue<T, "spacing">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  marginX?: PropertyValue<T, "spacing">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  marginY?: PropertyValue<T, "spacing">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  paddingTop?: PropertyValue<T, "spacing">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  paddingRight?: PropertyValue<T, "spacing">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  paddingBottom?: PropertyValue<T, "spacing">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  paddingLeft?: PropertyValue<T, "spacing">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  paddingX?: PropertyValue<T, "spacing">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  paddingY?: PropertyValue<T, "spacing">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  color?: PropertyValue<T, "colors">;
+  /**
+   * @see 
+   * @slug 
+   * @last_test_date 
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  fontFamily?: PropertyValue<T, "fonts">;
 }

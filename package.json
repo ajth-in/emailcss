@@ -29,7 +29,7 @@
     "release": "bumpp",
     "prepublishOnly": "pnpm run build",
     "prepare": "vp config",
-    "cie:generate": "tsx src/scripts/can-i-email.ts",
+    "cie:generate": "tsx src/can-i-email/index.ts",
     "types:generate": "tsx src/scripts/generate-types.ts"
   },
   "dependencies": {

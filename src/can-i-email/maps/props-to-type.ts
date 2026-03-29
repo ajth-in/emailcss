@@ -1,6 +1,6 @@
 export const propsToType = {
   // Background
-  "background": "colors",
+  background: "colors",
   "background-color": "colors",
   "background-position": "string",
   "background-position-x": "string",
@@ -17,7 +17,7 @@ export const propsToType = {
   "background-composite": "string",
 
   // Border
-  "border": "borders",
+  border: "borders",
   "border-width": "borderWidths",
   "border-style": "string",
   "border-color": "colors",
@@ -28,59 +28,59 @@ export const propsToType = {
   "border-left-radius": "radii",
 
   // Effect
-  "opacity": "opacity",
+  opacity: "opacity",
   "box-shadow": "shadows",
 
   // Layout
-  "visibility": "string",
-  "display": "string",
-  "position": "string",
-  "top": "spacing",
-  "bottom": "spacing",
-  "left": "spacing",
-  "right": "spacing",
+  visibility: "string",
+  display: "string",
+  position: "string",
+  top: "spacing",
+  bottom: "spacing",
+  left: "spacing",
+  right: "spacing",
   "z-index": "zIndex",
 
   // Flexbox
-  "flex": "string",
+  flex: "string",
   "flex-direction": "string",
   "align-items": "string",
   "justify-content": "string",
-  "gap": "spacing",
+  gap: "spacing",
   "column-gap": "spacing",
   "row-gap": "spacing",
 
   // Other
-  "cursor": "cursor",
+  cursor: "cursor",
   "pointer-events": "string",
   "user-select": "string",
 
   // Sizing
-  "width": "sizes",
-  "height": "sizes",
+  width: "sizes",
+  height: "sizes",
   "min-width": "sizes",
   "max-width": "sizes",
   "min-height": "sizes",
   "max-height": "sizes",
 
   // Spacing
-  "margin": "spacing",
+  margin: "spacing",
   "margin-top": "spacing",
   "margin-right": "spacing",
   "margin-bottom": "spacing",
   "margin-left": "spacing",
   "margin-x": "spacing",
   "margin-y": "spacing",
-  "padding": "spacing",
+  padding: "spacing",
   "padding-top": "spacing",
   "padding-right": "spacing",
   "padding-bottom": "spacing",
   "padding-left": "spacing",
   "padding-x": "spacing",
   "padding-y": "spacing",
-
+  "accent-color": "colors",
   // Typography
-  "color": "colors",
+  color: "colors",
   "font-family": "fonts",
   "font-size": "fontSizes",
   "font-weight": "fontWeights",
