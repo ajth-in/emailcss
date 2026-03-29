@@ -11,17 +11,10 @@ overrides:
 importers:
 
   .:
-    dependencies:
+    devDependencies:
       '@react-email/components':
         specifier: 1.0.10
         version: 1.0.10(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      react:
-        specifier: 19.2.4
-        version: 19.2.4
-      react-dom:
-        specifier: 19.2.4
-        version: 19.2.4(react@19.2.4)
-    devDependencies:
       '@react-email/preview-server':
         specifier: 5.2.10
         version: 5.2.10(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -37,6 +30,12 @@ importers:
       bumpp:
         specifier: ^11.0.1
         version: 11.0.1
+      react:
+        specifier: 19.2.4
+        version: 19.2.4
+      react-dom:
+        specifier: 19.2.4
+        version: 19.2.4(react@19.2.4)
       react-email:
         specifier: 5.2.10
         version: 5.2.10
