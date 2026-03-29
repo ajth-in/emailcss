@@ -36,12 +36,24 @@ async function run() {
     if (description) {
       lines.push(`   * ${description}`);
     }
-    lines.push(`   * @see ${url}`);
-    lines.push(`   * @slug ${slug}`);
-    lines.push(`   * @last_test_date ${last_test_date}`);
+    if (url) {
+      lines.push(`   * @see ${url}`);
+    }
+    if (slug) {
+      lines.push(`   * @slug ${slug}`);
+    }
+    if (last_test_date) {
+      lines.push(`   * @last_test_date ${last_test_date}`);
+    }
+
+    // Only add coverage stats if we have real data (not the default 100/0/0 for untracked props)
+    // Actually, we can still add them, but if support is 100 and other fields are missing, it's probably untracked.
+    // However, the user said "only add lines if the value exist(url slug last_test_date)"
+
     lines.push(`   * @support ${coverage.support.toFixed(2)}%`);
     lines.push(`   * @partial ${coverage.partial.toFixed(2)}%`);
     lines.push(`   * @not_supported ${coverage.notSupported.toFixed(2)}%`);
+
     if (notes) {
       lines.push(`   * @notes ${notes}`);
     }

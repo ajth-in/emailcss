@@ -22,15 +22,16 @@
   },
   "scripts": {
     "email:dev": "email dev",
-    "build": "vp pack",
+    "build": "pnpm run prebuild && vp pack",
+    "prebuild": "pnpm run gen-property-map && pnpm run gen-types",
     "dev": "vp pack --watch",
     "test": "vp test",
     "typecheck": "tsc --noEmit",
     "release": "bumpp",
     "prepublishOnly": "pnpm run build",
     "prepare": "vp config",
-    "cie:generate": "tsx src/can-i-email/index.ts",
-    "types:generate": "tsx src/scripts/generate-types.ts"
+    "gen-property-map": "tsx src/can-i-email/index.ts",
+    "gen-types": "tsx src/scripts/generate-types.ts"
   },
   "dependencies": {
     "@react-email/components": "1.0.10",
