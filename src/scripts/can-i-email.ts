@@ -7,7 +7,7 @@ import { computeSupportCoverage } from "../can-i-email/compute-support-coverage"
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const MAPS_DIR = path.resolve(__dirname, "../style-props/can-i-email/maps");
 
-interface CanIEmailItem {
+export interface CanIEmailItem {
   slug: string;
   category: string;
   title: string;
@@ -25,9 +25,9 @@ interface Coverage {
   notSupported: number;
 }
 
-interface ProcessedItem {
+export interface ProcessedItem {
   slug: string;
-  description: string;
+  description: string | null;
   url: string;
   last_test_date: string;
   coverage: Coverage;

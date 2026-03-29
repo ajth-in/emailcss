@@ -1,6 +1,7 @@
 import type { Config } from "../types/config";
 import type { SystemProperties } from "../types/style-props";
 import { propertyCategoryMap } from "./property-cat-map";
+import { reportValidity } from "./report-validity";
 import { resolveToken } from "./resolve-token";
 
 export const css =
@@ -9,7 +10,7 @@ export const css =
     const resolvedStyles: Record<string, any> = {};
 
     Object.entries(styles).forEach(([prop, value]) => {
-      console.log(prop, value);
+      reportValidity(config, prop, value);
       if (value === undefined || value === null) return;
 
       if (prop === "marginX") {

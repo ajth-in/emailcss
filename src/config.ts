@@ -7,7 +7,7 @@ export function defineConfig<T extends Config>(config: T) {
   const { extended, ...rest } = config;
 
   const mergedConfig: Config = {
-    supportThreshold: "75",
+    supportThreshold: { threshold: 50, includePartialSupport: false },
     validationMode: "warn",
     ...rest,
     extended: {
