@@ -28,7 +28,8 @@
     "typecheck": "tsc --noEmit",
     "release": "bumpp",
     "prepublishOnly": "pnpm run build",
-    "prepare": "vp config"
+    "prepare": "vp config",
+    "cie:generate": "tsx src/scripts/can-i-email.ts"
   },
   "dependencies": {
     "@react-email/components": "1.0.10",
@@ -42,6 +43,7 @@
     "@typescript/native-preview": "7.0.0-dev.20260316.1",
     "bumpp": "^11.0.1",
     "react-email": "5.2.10",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "vite-plus": "latest",
     "vitest": "npm:@voidzero-dev/vite-plus-test@latest",
