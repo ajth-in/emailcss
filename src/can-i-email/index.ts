@@ -62,36 +62,52 @@ async function run() {
   const cssProps: Record<string, ProcessedItem> = {};
 
   for (const item of cssItems) {
-    const title = item.title.trim(); // Trim title to handle potential spaces
+    const title = item.title.trim();
+    const slug = item.slug;
 
-    // Skip keys containing spaces
-    if (title.includes(" ")) {
-      if (!title.includes("&")) {
-        continue;
+    // Determine category and clean title
+    const isUnit = slug.startsWith("css-unit-") && slug !== "css-unit-calc";
+    const isFunction =
+      slug.startsWith("css-function-") ||
+      slug === "css-unit-calc" ||
+      slug === "css-linear-gradient" ||
+      title.endsWith("()");
+
+    let cleanTitle = title;
+    if (isUnit) {
+      // "px unit" -> "px"
+      cleanTitle = title.replace(/\sunit$/i, "").trim();
+    }
+    if (isFunction) {
+      // Extract function name, e.g., "CSS calc() function" -> "calc()"
+      const match = title.match(/([a-z-]+)\(\)/i);
+      if (match) {
+        cleanTitle = `${match[1]}()`;
       }
     }
 
-    if (item.slug.startsWith("css-unit-")) {
-      cssUnits[title] = extractNeededFields(item, title);
-    } else if (
-      item.slug.startsWith("css-function-") ||
-      item.slug === "css-linear-gradient" ||
-      title.endsWith("()")
-    ) {
-      cssFunctions[title] = extractNeededFields(item, title);
-    } else if (title.startsWith("@")) {
-      cssAtRules[title] = extractNeededFields(item, title);
-    } else if (title.includes(":")) {
-      cssValues[title] = extractNeededFields(item, title);
-    } else if (title.includes("&")) {
-      const parts = title.split("&").map((s) => s.trim());
+    // Skip items with spaces in title IF they are not units or functions
+    if (!isUnit && !isFunction && cleanTitle.includes(" ") && !cleanTitle.includes("&")) {
+      continue;
+    }
+
+    if (isUnit) {
+      cssUnits[cleanTitle] = extractNeededFields(item, cleanTitle);
+    } else if (isFunction) {
+      cssFunctions[cleanTitle] = extractNeededFields(item, cleanTitle);
+    } else if (cleanTitle.startsWith("@")) {
+      cssAtRules[cleanTitle] = extractNeededFields(item, cleanTitle);
+    } else if (cleanTitle.includes(":")) {
+      cssValues[cleanTitle] = extractNeededFields(item, cleanTitle);
+    } else if (cleanTitle.includes("&")) {
+      const parts = cleanTitle.split("&").map((s) => s.trim());
       for (const part of parts) {
         if (!part.includes(" ")) {
           cssProps[part] = extractNeededFields(item, part);
         }
       }
     } else {
-      cssProps[title] = extractNeededFields(item, title);
+      cssProps[cleanTitle] = extractNeededFields(item, cleanTitle);
     }
   }
 
