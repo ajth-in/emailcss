@@ -4,17 +4,15 @@ import { css } from "./css";
 import { deepMerge } from "./utils/deep-merge";
 
 export function defineConfig<T extends Config>(config: T) {
-  const { extended, ...rest } = config;
-
-  const mergedConfig: Config = {
-    supportThreshold: { threshold: 50, includePartialSupport: false },
-    validationMode: "warn",
-    ...rest,
+  const mergedConfig = {
+    ...config,
+    supportThreshold: config.supportThreshold ?? { threshold: 50, includePartialSupport: false },
+    validationMode: config.validationMode ?? "warn",
     extended: {
-      ...extended,
-      theme: extended?.theme ? deepMerge(defaultTheme, extended.theme) : defaultTheme,
+      ...config.extended,
+      theme: config.extended?.theme ? deepMerge(defaultTheme, config.extended.theme) : defaultTheme,
     },
-  };
+  } as T;
 
   return { config: mergedConfig, css: css(mergedConfig) };
 }
