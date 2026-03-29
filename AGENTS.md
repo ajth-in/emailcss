@@ -1,88 +1,71 @@
-<!--VITE PLUS START-->
+# EmailCSS Agent Guide
 
-# Using Vite+, the Unified Toolchain for the Web
+This project is `emailcss`, a type-safe, compatibility-aware CSS-in-JS library specifically designed for React Email. It automates the ingestion of [Can I Email](https://www.caniemail.com/) data to provide real-time feedback on CSS support across various email clients.
 
-This project is using Vite+, a unified toolchain built on top of Vite, Rolldown, Vitest, tsdown, Oxlint, Oxfmt, and Vite Task. Vite+ wraps runtime management, package management, and frontend tooling in a single global CLI called `vp`. Vite+ is distinct from Vite, but it invokes Vite through `vp dev` and `vp build`.
+## Core Architecture
 
-## Vite+ Workflow
+### 1. Data Pipeline (`src/can-i-email/`)
 
-`vp` is a global binary that handles the full development lifecycle. Run `vp help` to print a list of commands and `vp <command> --help` for information about a specific command.
+- **`index.ts`**: Fetches raw data from the Can I Email API.
+- **Categorization**: Sorts items into Properties, Units, Functions, At-Rules, and Values (Property:Value pairs).
+- **Cleansing**: Normalizes identifiers (e.g., stripping " unit" from units, ensuring no spaces in property-value combinations).
+- **Maps**: Generates modular TypeScript maps in `src/can-i-email/maps/` reflecting the latest compatibility data.
 
-### Start
+### 2. Type System (`src/types/style-props/`)
 
-- create - Create a new project from a template
-- migrate - Migrate an existing project to Vite+
-- config - Configure hooks and agent integration
-- staged - Run linters on staged files
-- install (`i`) - Install dependencies
-- env - Manage Node.js versions
+- **`generate-types.ts`**: A script that reads the generated maps and creates `SystemProperties` in `index.ts`.
+- **JSDoc Enrichment**: Every CSS property in the interface includes:
+  - Description and "Can I Email" URL.
+  - Live support statistics (% supported, % partial, % not supported).
+  - `@deprecated` tag if support is below a configurable threshold (default 40%).
+- **Token Awareness**: Types are generics (`SystemProperties<T>`) that resolve to your theme's custom tokens.
 
-### Develop
+### 3. Runtime Validator (`src/css/report-validity.ts`)
 
-- dev - Run the development server
-- check - Run format, lint, and TypeScript type checks
-- lint - Lint code
-- fmt - Format code
-- test - Run tests
+- **Multi-Tier Validation**: When styles are processed, it checks:
+  1. **Property Compatibility** (e.g., is `accent-color` supported?).
+  2. **Value Combinations** (e.g., is `display:grid` supported?).
+  3. **CSS Functions** (e.g., are `calc()`, `min()`, `clamp()` supported?).
+  4. **CSS Units** (e.g., are `vw`, `rem`, `ch` supported?).
+- **Feedback**: Reports issues to the console with color-coded severity (Blue for props, Yellow for values, Magenta for functions, Green for units).
+- **Deduplication**: Uses a lazy-initialized cache on the config object to ensure each warning is only logged once per generation.
 
-### Execute
+### 4. Style Engine (`src/css/`)
 
-- run - Run monorepo tasks
-- exec - Execute a command from local `node_modules/.bin`
-- dlx - Execute a package binary without installing it as a dependency
-- cache - Manage the task cache
+- **Token Resolution**: Recursively resolves values against the theme defined in `defineConfig`.
+- **Shorthand Expansion**: Declaratively expands logic for directional utilities like `marginX`, `paddingY`, and `borderTopRadius`.
 
-### Build
+## Developer Workflow
 
-- build - Build for production
-- pack - Build libraries
-- preview - Preview production build
+### Maintenance Commands
 
-### Manage Dependencies
+- `pnpm run gen-property-map`: Sync local maps with the latest Can I Email API data.
+- `pnpm run gen-types`: Regenerate the `SystemProperties` interface based on current maps.
+- `pnpm run prebuild`: Runs both of the above. Always run this after modifying `src/can-i-email/maps/props-to-type.ts`.
 
-Vite+ automatically detects and wraps the underlying package manager such as pnpm, npm, or Yarn through the `packageManager` field in `package.json` or package manager-specific lockfiles.
+### Configuration
 
-- add - Add packages to dependencies
-- remove (`rm`, `un`, `uninstall`) - Remove packages from dependencies
-- update (`up`) - Update packages to latest versions
-- dedupe - Deduplicate dependencies
-- outdated - Check for outdated packages
-- list (`ls`) - List installed packages
-- why (`explain`) - Show why a package is installed
-- info (`view`, `show`) - View package information from the registry
-- link (`ln`) / unlink - Manage local package links
-- pm - Forward a command to the package manager
+Use `defineConfig` to set up your email design system:
 
-### Maintain
-
-- upgrade - Update `vp` itself to the latest version
-
-These commands map to their corresponding tools. For example, `vp dev --port 3000` runs Vite's dev server and works the same as Vite. `vp test` runs JavaScript tests through the bundled Vitest. The version of all tools can be checked using `vp --version`. This is useful when researching documentation, features, and bugs.
-
-## Common Pitfalls
-
-- **Using the package manager directly:** Do not use pnpm, npm, or Yarn directly. Vite+ can handle all package manager operations.
-- **Always use Vite commands to run tools:** Don't attempt to run `vp vitest` or `vp oxlint`. They do not exist. Use `vp test` and `vp lint` instead.
-- **Running scripts:** Vite+ built-in commands (`vp dev`, `vp build`, `vp test`, etc.) always run the Vite+ built-in tool, not any `package.json` script of the same name. To run a custom script that shares a name with a built-in command, use `vp run <script>`. For example, if you have a custom `dev` script that runs multiple services concurrently, run it with `vp run dev`, not `vp dev` (which always starts Vite's dev server).
-- **Do not install Vitest, Oxlint, Oxfmt, or tsdown directly:** Vite+ wraps these tools. They must not be installed directly. You cannot upgrade these tools by installing their latest versions. Always use Vite+ commands.
-- **Use Vite+ wrappers for one-off binaries:** Use `vp dlx` instead of package-manager-specific `dlx`/`npx` commands.
-- **Import JavaScript modules from `vite-plus`:** Instead of importing from `vite` or `vitest`, all modules should be imported from the project's `vite-plus` dependency. For example, `import { defineConfig } from 'vite-plus';` or `import { expect, test, vi } from 'vite-plus/test';`. You must not install `vitest` to import test utilities.
-- **Type-Aware Linting:** There is no need to install `oxlint-tsgolint`, `vp lint --type-aware` works out of the box.
-
-## CI Integration
-
-For GitHub Actions, consider using [`voidzero-dev/setup-vp`](https://github.com/voidzero-dev/setup-vp) to replace separate `actions/setup-node`, package-manager setup, cache, and install steps with a single action.
-
-```yaml
-- uses: voidzero-dev/setup-vp@v1
-  with:
-    cache: true
-- run: vp check
-- run: vp test
+```typescript
+const { css } = defineConfig({
+  validationMode: "warn", // "warn" | "error" | "none"
+  supportThreshold: { threshold: 90, includePartialSupport: false },
+  strictTokens: false,
+  extended: {
+    theme: {
+      tokens: {
+        colors: { brand: { blue: { value: "#2754C5" } } },
+        // ... other tokens
+      },
+    },
+  },
+});
 ```
 
-## Review Checklist for Agents
+## Guiding Principles for Agents
 
-- [ ] Run `vp install` after pulling remote changes and before getting started.
-- [ ] Run `vp check` and `vp test` to validate changes.
-<!--VITE PLUS END-->
+1. **Don't ignore the warnings**: They represent real-world email client support issues.
+2. **Consult the URLs**: Every warning includes a link to the Can I Email feature page for detailed client-specific notes.
+3. **Prefer Tokens**: Use the theme system instead of hardcoded hex colors or pixel values to maintain type safety and consistency.
+4. **Update Metadata if needed**: If a new CSS property isn't being caught or has wrong types, update `src/can-i-email/maps/props-to-type.ts` and run `pnpm run prebuild`.
