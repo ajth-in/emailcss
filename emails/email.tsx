@@ -12,12 +12,7 @@ import {
   Text,
 } from "@react-email/components";
 import * as React from "react";
-import { defineConfig } from "../src/config";
-
-const { css } = defineConfig({
-  validationMode: "warn",
-  supportThreshold: { threshold: 50, includePartialSupport: true },
-});
+import { css } from "./css";
 
 interface AWSVerifyEmailProps {
   verificationCode?: string;
@@ -30,38 +25,41 @@ export default function AWSVerifyEmail({ verificationCode }: AWSVerifyEmailProps
     <Html>
       <Head />
       <Preview>AWS Email Verification</Preview>
-      <Body style={css({ backgroundColor: "white", color: "#212121" })}>
-        <Container style={css({ padding: "5", marginX: "auto", backgroundColor: "#eee" })}>
-          <Section style={css({ backgroundColor: "white" })}>
+      <Body style={css({ backgroundColor: "gray.100", color: "gray.900" })}>
+        <Container
+          style={css({ padding: "section", marginX: "auto", backgroundColor: "gray.100" })}
+        >
+          <Section style={css({ backgroundColor: "gray.50" })}>
             <Section
               style={css({
-                backgroundColor: "#252f3d",
+                backgroundColor: "brand.navy",
                 display: "flex",
-                paddingY: "5",
+                paddingY: "section",
                 alignItems: "center",
                 justifyContent: "center",
               })}
             >
-              <Img src={`${baseUrl}/static/aws-logo.png`} width="75" height="45" alt="AWS's Logo" />
+              <Img src={`${baseUrl}/static/aws-logo.png`} width="75" height="45" alt="AWS Logo" />
             </Section>
-            <Section style={css({ paddingY: "25px", paddingX: "35px" })}>
+
+            <Section style={css({ paddingY: "contentY", paddingX: "contentX" })}>
               <Heading
                 style={css({
-                  color: "#333",
-                  fontSize: "xl",
+                  color: "gray.800",
+                  fontSize: "title",
                   fontWeight: "bold",
-                  marginBottom: "15px",
+                  marginBottom: "heading",
                 })}
               >
                 Verify your email address
               </Heading>
               <Text
                 style={css({
-                  color: "#333",
-                  fontSize: "sm",
+                  color: "gray.800",
+                  fontSize: "body",
                   lineHeight: "relaxed",
                   marginTop: "6",
-                  marginBottom: "14px",
+                  marginBottom: "text",
                   marginX: "0",
                 })}
               >
@@ -74,11 +72,11 @@ export default function AWSVerifyEmail({ verificationCode }: AWSVerifyEmailProps
               >
                 <Text
                   style={css({
-                    color: "#333",
+                    color: "gray.800",
                     margin: "0",
                     fontWeight: "bold",
                     textAlign: "center",
-                    fontSize: "sm",
+                    fontSize: "body",
                   })}
                 >
                   Verification code
@@ -86,8 +84,8 @@ export default function AWSVerifyEmail({ verificationCode }: AWSVerifyEmailProps
 
                 <Text
                   style={css({
-                    color: "#333",
-                    fontSize: "4xl",
+                    color: "gray.800",
+                    fontSize: "code",
                     marginY: "10px",
                     marginX: "0",
                     fontWeight: "bold",
@@ -97,37 +95,45 @@ export default function AWSVerifyEmail({ verificationCode }: AWSVerifyEmailProps
                   {verificationCode}
                 </Text>
                 <Text
-                  style={css({ color: "#333", fontSize: "sm", margin: "0", textAlign: "center" })}
+                  style={css({
+                    color: "gray.800",
+                    fontSize: "body",
+                    margin: "0",
+                    textAlign: "center",
+                  })}
                 >
                   (This code is valid for 10 minutes)
                 </Text>
               </Section>
             </Section>
+
             <Hr />
-            <Section style={css({ paddingY: "25px", paddingX: "35px" })}>
-              <Text style={css({ color: "#333", fontSize: "sm", margin: "0" })}>
+
+            <Section style={css({ paddingY: "contentY", paddingX: "contentX" })}>
+              <Text style={css({ color: "gray.800", fontSize: "body", margin: "0" })}>
                 Amazon Web Services will never email you and ask you to disclose or verify your
                 password, credit card, or banking account number.
               </Text>
             </Section>
           </Section>
+
           <Text
             style={css({
-              color: "#333",
-              fontSize: "xs",
+              color: "gray.800",
+              fontSize: "footer",
               marginY: "24px",
               marginX: "0",
-              paddingX: "5",
+              paddingX: "section",
               paddingY: "0",
             })}
           >
-            This message was produced and distributed by Amazon Web Services, Inc., 410 Terry Ave.
-            North, Seattle, WA 98109. © 2022, Amazon Web Services, Inc.. All rights reserved. AWS is
+            This message was produced and distributed by Amazon Web Services, Inc., 41 Terry Ave.
+            North, Seattle, WA 98109. © 2022, Amazon Web Services, Inc. All rights reserved. AWS is
             a registered trademark of{" "}
             <Link
               href="https://amazon.com"
               target="_blank"
-              style={css({ color: "#2754C5", textDecoration: "underline", fontSize: "sm" })}
+              style={css({ color: "brand.blue", textDecoration: "underline", fontSize: "body" })}
             >
               Amazon.com
             </Link>
@@ -135,7 +141,7 @@ export default function AWSVerifyEmail({ verificationCode }: AWSVerifyEmailProps
             <Link
               href="https://amazon.com"
               target="_blank"
-              style={css({ color: "#2754C5", textDecoration: "underline", fontSize: "sm" })}
+              style={css({ color: "brand.blue", textDecoration: "underline", fontSize: "body" })}
             >
               privacy policy
             </Link>

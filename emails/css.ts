@@ -1,22 +1,38 @@
 import { defineConfig } from "../src/config";
 
-const { css } = defineConfig({
+export const { css } = defineConfig({
+  validationMode: "warn",
+  supportThreshold: { threshold: 50, includePartialSupport: true },
   extended: {
     theme: {
       tokens: {
         colors: {
-          black: {
-            sa: {
-              value: "#00f",
-            },
+          brand: {
+            navy: { value: "#252f3d" },
+            blue: { value: "#2754C5" },
           },
-          primary: {
-            value: "#f00",
+          gray: {
+            "50": { value: "#ffffff" },
+            "100": { value: "#eeeeee" },
+            "800": { value: "#333333" },
+            "900": { value: "#212121" },
           },
+        },
+        spacing: {
+          container: { value: "20px" },
+          contentY: { value: "25px" },
+          contentX: { value: "35px" },
+          section: { value: "20px" },
+          heading: { value: "15px" },
+          text: { value: "14px" },
+        },
+        fontSizes: {
+          title: { value: "20px" },
+          body: { value: "14px" },
+          footer: { value: "12px" },
+          code: { value: "36px" },
         },
       },
     },
   },
 });
-
-export default css;
