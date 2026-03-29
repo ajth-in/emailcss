@@ -1,0 +1,5 @@
+---
+"emailcss": patch
+---
+
+initial release
