@@ -2,7 +2,7 @@ import { defineConfig } from "../src/config";
 
 export const { css } = defineConfig({
   validationMode: "warn",
-  supportThreshold: { threshold: 50, includePartialSupport: true },
+  supportThreshold: { threshold: 90, includePartialSupport: false },
   strictTokens: false,
   extended: {
     theme: {

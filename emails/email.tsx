@@ -25,7 +25,7 @@ export default function AWSVerifyEmail({ verificationCode }: AWSVerifyEmailProps
     <Html>
       <Head />
       <Preview>AWS Email Verification</Preview>
-      <Body style={css({ backgroundColor: "gray.100", color: "gray.900" })}>
+      <Body style={css({ backgroundColor: "gray.100", color: "gray.900", display: "flex" })}>
         <Container
           style={css({ padding: "section", marginX: "auto", backgroundColor: "gray.100" })}
         >

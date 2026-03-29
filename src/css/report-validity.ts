@@ -47,12 +47,12 @@ export const reportValidity = <T extends Config>(
     const formattedThreshold = c.bold(`${thresholdConfig.threshold}%`);
     const formattedUrl = c.cyan(data.url);
 
-    const message = `Low support for ${formattedProp}: ${formattedScore} (min ${formattedThreshold}) (${formattedUrl})`;
+    const message = `${formattedProp}: ${formattedScore} (${formattedThreshold}) ${formattedUrl}`;
 
     if (mode === "error") {
       throw new CompatibilityError(message);
     } else if (mode === "warn") {
-      console.warn(`[email-css] ${message}`);
+      console.warn(`[🪄] ${message}`);
     }
   }
 };
