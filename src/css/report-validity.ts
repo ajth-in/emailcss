@@ -7,9 +7,22 @@ import { camelToKebab } from "../utils/camel-to-kebab";
 
 const propertiesMap = canIEmailCSSProperties as Record<string, ProcessedItem>;
 
-export const reportValidity = <T extends Config>(config: T, prop: string, _value: string) => {
+type ValidationCache = {
+  reportedProps: Set<string>;
+};
+
+export const reportValidity = <T extends Config>(
+  config: T & { __cache?: ValidationCache },
+  prop: string,
+  _value: string,
+) => {
   const mode = config.validationMode || "warn";
   if (mode === "none") return;
+
+  config.__cache ??= { reportedProps: new Set() };
+
+  if (config.__cache.reportedProps.has(prop)) return;
+  config.__cache.reportedProps.add(prop);
 
   const thresholdConfig = config.supportThreshold || {
     threshold: 50,
