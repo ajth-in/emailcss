@@ -6,6 +6,18 @@ export const { css } = defineConfig({
   strictTokens: false,
   extended: {
     theme: {
+      semanticTokens: {
+        colors: {
+          button: {
+            primary: {
+              value: "{button.secondary}",
+            },
+            secondary: {
+              value: "{brand.navy}",
+            },
+          },
+        },
+      },
       tokens: {
         zIndex: {
           popover: { value: "10000" },

@@ -32,9 +32,9 @@ export default function AWSVerifyEmail({ verificationCode }: AWSVerifyEmailProps
           <Section style={css({ backgroundColor: "gray.50" })}>
             <Section
               style={css({
-                boxShadow: "shadow-xs",
+                boxShadow: "drop-shadow-2xl",
                 color: "zinc.800",
-                backgroundColor: "brand.navy",
+                backgroundColor: "button.primary",
                 display: "grid",
                 marginTop: "calc(100dvw - min(max(100px, 90rem)), 10px)",
                 paddingY: "section",
