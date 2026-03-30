@@ -18,7 +18,7 @@ interface AWSVerifyEmailProps {
   verificationCode?: string;
 }
 
-const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "";
+const baseUrl = `https://ajth.in`;
 
 export default function AWSVerifyEmail({ verificationCode }: AWSVerifyEmailProps) {
   return (
@@ -32,6 +32,7 @@ export default function AWSVerifyEmail({ verificationCode }: AWSVerifyEmailProps
           <Section style={css({ backgroundColor: "gray.50" })}>
             <Section
               style={css({
+                color: "zinc.800",
                 backgroundColor: "brand.navy",
                 display: "grid",
                 marginTop: "calc(100dvw - min(max(100px, 90rem)), 10px)",
