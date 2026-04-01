@@ -10,7 +10,7 @@ const typeCategoryMap = propsToType as Record<string, string>;
 
 export const css =
   <T extends Config>(config: T) =>
-  (styles: SystemProperties<T>): Record<string, any> | string => {
+  (styles: SystemProperties<T>): Record<string, any> => {
     const resolvedStyles: Record<string, any> = {};
 
     Object.entries(styles).forEach(([_prop, value]) => {
@@ -23,12 +23,6 @@ export const css =
       const category = typeCategoryMap[kebabProp];
       resolvedStyles[prop] = category ? resolveToken(config, category, value) : value;
     });
-
-    if (config.cssReturnType === "raw") {
-      return Object.entries(resolvedStyles)
-        .map(([prop, value]) => `${camelToKebab(prop)}: ${value};`)
-        .join(" ");
-    }
 
     return resolvedStyles;
   };

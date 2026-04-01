@@ -16,24 +16,23 @@ describe("css function", () => {
           },
         },
       },
-      cssReturnType: "jsx",
     });
 
-    const styles = css({
+    const styleObj = css({
       backgroundColor: "customBrand",
       padding: "customContainer",
       fontSize: "16px",
     });
 
-    expect(styles).toEqual({
+    expect(styleObj).toEqual({
       backgroundColor: "#2754C5",
       padding: "20px",
       fontSize: "16px",
     });
   });
 
-  test("should resolve theme tokens in raw mode", () => {
-    const { css } = defineConfig({
+  test("should resolve theme tokens in raw mode via styles()", () => {
+    const { styles } = defineConfig({
       extended: {
         theme: {
           tokens: {
@@ -43,56 +42,48 @@ describe("css function", () => {
           },
         },
       },
-      cssReturnType: "raw",
     });
 
-    const styles = css({
+    const styleStr = styles({
       backgroundColor: "customBrand",
       color: "blue.500",
     });
 
-    expect(styles).toContain("background-color: #2754C5;");
-    expect(styles).toContain("color: #2BDAE0;");
+    expect(styleStr).toContain("background-color: #2754C5;");
+    expect(styleStr).toContain("color: #2BDAE0;");
   });
 
   test("should handle missing tokens by returning the literal value", () => {
-    const { css } = defineConfig({
-      cssReturnType: "jsx",
-    });
+    const { css } = defineConfig({});
 
-    const styles = css({
+    const styleObj = css({
       backgroundColor: "non-existent",
     });
 
-    if (typeof styles === "string") throw new Error("This should not be a string");
-    expect(styles.backgroundColor).toBe("non-existent");
+    expect(styleObj.backgroundColor).toBe("non-existent");
   });
 
-  test("should return kebab-case keys in raw mode", () => {
-    const { css } = defineConfig({
-      cssReturnType: "raw",
-    });
+  test("should return kebab-case keys in raw mode via styles()", () => {
+    const { styles } = defineConfig({});
 
-    const styles = css({
+    const styleStr = styles({
       backgroundColor: "red.500",
       fontSize: "12px",
     });
 
-    expect(styles).toBe("background-color: #FA0054; font-size: 12px;");
+    expect(styleStr).toBe("background-color: #FA0054; font-size: 12px;");
   });
 
   test("should handle null or undefined values by omitting them", () => {
-    const { css } = defineConfig({
-      cssReturnType: "jsx",
-    });
+    const { css } = defineConfig({});
 
-    const styles = css({
+    const styleObj = css({
       backgroundColor: "red.500",
       color: undefined,
       margin: null,
     }) as any;
 
-    expect(styles).toEqual({
+    expect(styleObj).toEqual({
       backgroundColor: "#FA0054",
     });
   });
