@@ -17,11 +17,12 @@ type ValidationCache = {
   reportedProps: Set<string>;
 };
 
-export const reportValidity = <T extends Config>(
+export const reportCompatibilityIssues = <T extends Config>(
   config: T & { __cache?: ValidationCache },
   prop: string,
   value: string,
 ) => {
+  if (config.reportCompatibilityIssues === false) return;
   const mode = config.validationMode || "warn";
   if (mode === "none") return;
 

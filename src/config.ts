@@ -6,6 +6,7 @@ import { deepMerge } from "./utils/deep-merge";
 export function defineConfig<T extends Config>(config: T) {
   const mergedConfig = {
     ...config,
+    reportCompatibilityIssues: config.reportCompatibilityIssues ?? true,
     supportThreshold: config.supportThreshold ?? { threshold: 50, includePartialSupport: false },
     validationMode: config.validationMode ?? "warn",
     extended: {

@@ -1,6 +1,7 @@
 import { defineConfig } from "../src/config";
 
 export const { css } = defineConfig({
+  reportCompatibilityIssues: process.env.NODE_ENV === "development",
   validationMode: "warn",
   supportThreshold: { threshold: 90, includePartialSupport: false },
   strictTokens: false,

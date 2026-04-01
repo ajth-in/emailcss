@@ -2,7 +2,7 @@ import type { Config } from "../types/config";
 import type { SystemProperties } from "../types/style-props";
 import { propsToType } from "../can-i-email/maps/props-to-type";
 import { camelToKebab } from "../utils/camel-to-kebab";
-import { reportValidity } from "./report-validity";
+import { reportCompatibilityIssues } from "./report-compatibility-issues";
 import { resolveToken } from "./resolve-token";
 
 const typeCategoryMap = propsToType as Record<string, string>;
@@ -36,7 +36,7 @@ export const css =
     const resolvedStyles: Record<string, any> = {};
 
     Object.entries(styles).forEach(([prop, value]) => {
-      reportValidity(config, prop, value);
+      reportCompatibilityIssues(config, prop, value);
       if (value === undefined || value === null) return;
 
       const shorthand = SHORTHANDS[prop];

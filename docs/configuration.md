@@ -51,6 +51,21 @@ const { css } = defineConfig({
 
 ---
 
+## `reportCompatibilityIssues`
+
+Enables or disables the style compatibility reporting process entirely.
+
+- **`true`** (default): Validates CSS against "Can I Email" data based on `validationMode` and `supportThreshold`.
+- **`false`**: Disables all compatibility checks and console reporting.
+
+```typescript
+const { css } = defineConfig({
+  reportCompatibilityIssues: false,
+});
+```
+
+---
+
 ## `extended`
 
 This is where you define your theme, including tokens and semantic aliases.

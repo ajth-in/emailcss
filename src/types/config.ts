@@ -27,4 +27,10 @@ export interface Config {
    * @default false
    */
   strictTokens?: boolean;
+
+  /**
+   * Whether to report CSS compatibility issues based on "Can I Email" data.
+   * @default true
+   */
+  reportCompatibilityIssues?: boolean;
 }

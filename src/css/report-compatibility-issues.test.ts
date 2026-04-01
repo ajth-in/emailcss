@@ -1,5 +1,5 @@
 import { expect, test, vi, beforeEach } from "vite-plus/test";
-import { reportValidity } from "./report-validity";
+import { reportCompatibilityIssues } from "./report-compatibility-issues";
 import { CompatibilityError } from "../exceptions/compatibility-error";
 
 beforeEach(() => {
@@ -9,7 +9,7 @@ beforeEach(() => {
 test("reportValidity should skip if mode is none", () => {
   const config = { validationMode: "none" as const };
   const spy = vi.spyOn(console, "warn").mockImplementation(() => {});
-  reportValidity(config, "accentColor", "red");
+  reportCompatibilityIssues(config, "accentColor", "red");
   expect(spy).not.toHaveBeenCalled();
 });
 
@@ -19,7 +19,7 @@ test("reportValidity should warn if mode is warn and support is below threshold"
     supportThreshold: { threshold: 50, includePartialSupport: false },
   };
   const spy = vi.spyOn(console, "warn").mockImplementation(() => {});
-  reportValidity(config, "accentColor", "red");
+  reportCompatibilityIssues(config, "accentColor", "red");
   expect(spy).toHaveBeenCalled();
   const call = spy.mock.calls[0][0] as string;
   expect(call).toContain("accentColor");
@@ -32,7 +32,7 @@ test("reportValidity should throw CompatibilityError if mode is error and suppor
     supportThreshold: { threshold: 50, includePartialSupport: false },
   };
   expect(() => {
-    reportValidity(config, "accentColor", "red");
+    reportCompatibilityIssues(config, "accentColor", "red");
   }).toThrow(CompatibilityError);
 });
 
@@ -43,10 +43,10 @@ test("reportValidity should deduplicate reports using cache", () => {
   };
   const spy = vi.spyOn(console, "warn").mockImplementation(() => {});
 
-  reportValidity(config, "accentColor", "red");
+  reportCompatibilityIssues(config, "accentColor", "red");
   expect(spy).toHaveBeenCalledTimes(1);
 
-  reportValidity(config, "accentColor", "blue");
+  reportCompatibilityIssues(config, "accentColor", "blue");
   expect(spy).toHaveBeenCalledTimes(1);
 });
 
@@ -57,7 +57,7 @@ test("reportValidity should validate CSS functions in values", () => {
   };
   const spy = vi.spyOn(console, "warn").mockImplementation(() => {});
 
-  reportValidity(config, "backgroundColor", "conic-gradient(red, blue)");
+  reportCompatibilityIssues(config, "backgroundColor", "conic-gradient(red, blue)");
 
   expect(spy).toHaveBeenCalled();
   const calls = spy.mock.calls.map((c) => c[0] as string);
@@ -71,7 +71,7 @@ test("reportValidity should validate multiple functions in one value", () => {
   };
   const spy = vi.spyOn(console, "warn").mockImplementation(() => {});
 
-  reportValidity(config, "display", "rgba(0,0,0,0.5) linear-gradient(red, blue)");
+  reportCompatibilityIssues(config, "display", "rgba(0,0,0,0.5) linear-gradient(red, blue)");
 
   const calls = spy.mock.calls.map((c) => c[0] as string);
   expect(calls.some((c) => c.includes("rgba()"))).toBe(true);
@@ -85,7 +85,7 @@ test("reportValidity should validate CSS units in values", () => {
   };
   const spy = vi.spyOn(console, "warn").mockImplementation(() => {});
 
-  reportValidity(config, "width", "100vw");
+  reportCompatibilityIssues(config, "width", "100vw");
 
   const calls = spy.mock.calls.map((c) => c[0] as string);
   expect(calls.some((c) => c.includes("vw"))).toBe(true);
@@ -98,9 +98,9 @@ test("reportValidity should deduplicate units across different props", () => {
   };
   const spy = vi.spyOn(console, "warn").mockImplementation(() => {});
 
-  reportValidity(config, "width", "10vw");
+  reportCompatibilityIssues(config, "width", "10vw");
   const firstCallCount = spy.mock.calls.length;
 
-  reportValidity(config, "height", "20vw");
+  reportCompatibilityIssues(config, "height", "20vw");
   expect(spy.mock.calls.length).toBe(firstCallCount);
 });

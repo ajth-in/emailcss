@@ -20,7 +20,7 @@ This project is `mailcss`, a type-safe, compatibility-aware CSS-in-JS library sp
   - `@deprecated` tag if support is below a configurable threshold (default 40%).
 - **Token Awareness**: Types are generics (`SystemProperties<T>`) that resolve to your theme's custom tokens.
 
-### 3. Runtime Validator (`src/css/report-validity.ts`)
+### 3. Runtime Validator (`src/css/report-compatibility-issues.ts`)
 
 - **Multi-Tier Validation**: When styles are processed, it checks:
   1. **Property Compatibility** (e.g., is `accent-color` supported?).
