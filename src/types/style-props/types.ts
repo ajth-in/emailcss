@@ -30,4 +30,5 @@ export type RecursiveKeyOf<T> = T extends object
 export type PropertyValue<T, K extends keyof TokenDataTypes> =
   | TokenKey<T, K>
   | SemanticTokenKey<T, K>
-  | (T extends { strictTokens: true } ? never : AnyString);
+  | (T extends { strictTokens: true } ? never : AnyString)
+  | null;
