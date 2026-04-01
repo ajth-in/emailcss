@@ -706,7 +706,7 @@ export const canIEmailCSSProperties = {
       notSupported: 58.18181818181818,
     },
     notes: null,
-    type: "string",
+    type: "spacing",
   },
   "margin-block": {
     slug: "css-margin-inline-block",
@@ -719,7 +719,7 @@ export const canIEmailCSSProperties = {
       notSupported: 58.18181818181818,
     },
     notes: null,
-    type: "string",
+    type: "spacing",
   },
   "margin-inline-start": {
     slug: "css-margin-inline-start-end",
@@ -998,7 +998,7 @@ export const canIEmailCSSProperties = {
       notSupported: 73.33333333333333,
     },
     notes: null,
-    type: "string",
+    type: "spacing",
   },
   "padding-block": {
     slug: "css-padding-inline-block",
@@ -1011,7 +1011,7 @@ export const canIEmailCSSProperties = {
       notSupported: 73.33333333333333,
     },
     notes: null,
-    type: "string",
+    type: "spacing",
   },
   "padding-inline-start": {
     slug: "css-padding-inline-start-end",
@@ -2017,6 +2017,32 @@ export const canIEmailCSSProperties = {
     notes: null,
     type: "spacing",
   },
+  mx: {
+    slug: "",
+    description: null,
+    url: "",
+    last_test_date: "",
+    coverage: {
+      support: 100,
+      partial: 0,
+      notSupported: 0,
+    },
+    notes: null,
+    type: "spacing",
+  },
+  my: {
+    slug: "",
+    description: null,
+    url: "",
+    last_test_date: "",
+    coverage: {
+      support: 100,
+      partial: 0,
+      notSupported: 0,
+    },
+    notes: null,
+    type: "spacing",
+  },
   "padding-top": {
     slug: "",
     description: null,
@@ -2083,6 +2109,32 @@ export const canIEmailCSSProperties = {
     type: "spacing",
   },
   "padding-y": {
+    slug: "",
+    description: null,
+    url: "",
+    last_test_date: "",
+    coverage: {
+      support: 100,
+      partial: 0,
+      notSupported: 0,
+    },
+    notes: null,
+    type: "spacing",
+  },
+  px: {
+    slug: "",
+    description: null,
+    url: "",
+    last_test_date: "",
+    coverage: {
+      support: 100,
+      partial: 0,
+      notSupported: 0,
+    },
+    notes: null,
+    type: "spacing",
+  },
+  py: {
     slug: "",
     description: null,
     url: "",

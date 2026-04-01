@@ -143,7 +143,7 @@ export const canIEmailCSSUnits = {
       notSupported: 0,
     },
     notes: "",
-    type: "string",
+    type: "spacing",
   },
   rem: {
     slug: "css-unit-rem",

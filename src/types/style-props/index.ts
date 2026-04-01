@@ -525,7 +525,7 @@ export interface SystemProperties<T = Config> {
    * @partial 0.00%
    * @not_supported 58.18%
    */
-  marginInline?: AnyString;
+  marginInline?: PropertyValue<T, "spacing">;
   /**
    * Support for the `margin-inline` and `margin-block` shorthand properties.
    * @see https://www.caniemail.com/features/css-margin-inline-block/
@@ -535,7 +535,7 @@ export interface SystemProperties<T = Config> {
    * @partial 0.00%
    * @not_supported 58.18%
    */
-  marginBlock?: AnyString;
+  marginBlock?: PropertyValue<T, "spacing">;
   /**
    * Support for the `margin-inline-start` and `margin-inline-end` css properties.
    * @see https://www.caniemail.com/features/css-margin-inline-start-end/
@@ -747,7 +747,7 @@ export interface SystemProperties<T = Config> {
    * @not_supported 73.33%
    * @deprecated poor support coverage. This property might not work as expected in many email clients.
    */
-  paddingInline?: AnyString;
+  paddingInline?: PropertyValue<T, "spacing">;
   /**
    * Support for the `padding-inline` and `padding-block` shorthand properties.
    * @see https://www.caniemail.com/features/css-padding-inline-block/
@@ -758,7 +758,7 @@ export interface SystemProperties<T = Config> {
    * @not_supported 73.33%
    * @deprecated poor support coverage. This property might not work as expected in many email clients.
    */
-  paddingBlock?: AnyString;
+  paddingBlock?: PropertyValue<T, "spacing">;
   /**
    * Support for the `padding-inline-start` and `padding-inline-end` css properties.
    * @see https://www.caniemail.com/features/css-padding-inline-start-end/
@@ -1400,6 +1400,18 @@ export interface SystemProperties<T = Config> {
    * @partial 0.00%
    * @not_supported 0.00%
    */
+  mx?: PropertyValue<T, "spacing">;
+  /**
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  my?: PropertyValue<T, "spacing">;
+  /**
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
   paddingTop?: PropertyValue<T, "spacing">;
   /**
    * @support 100.00%
@@ -1431,6 +1443,18 @@ export interface SystemProperties<T = Config> {
    * @not_supported 0.00%
    */
   paddingY?: PropertyValue<T, "spacing">;
+  /**
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  px?: PropertyValue<T, "spacing">;
+  /**
+   * @support 100.00%
+   * @partial 0.00%
+   * @not_supported 0.00%
+   */
+  py?: PropertyValue<T, "spacing">;
   /**
    * @support 100.00%
    * @partial 0.00%
