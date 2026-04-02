@@ -4,9 +4,9 @@ import { canIEmailCSSFunctions } from "../can-i-email/maps/functions";
 import { canIEmailCSSUnits } from "../can-i-email/maps/units";
 import { canIEmailCSSValues } from "../can-i-email/maps/values";
 import { CompatibilityError } from "../exceptions/compatibility-error";
-import type { ProcessedItem } from "../can-i-email";
 import * as c from "../utils/console-colors";
 import { camelToKebab } from "../utils/camel-to-kebab";
+import type { ProcessedItem } from "../can-i-email/types";
 
 const propertiesMap = canIEmailCSSProperties as Record<string, ProcessedItem>;
 const functionsMap = canIEmailCSSFunctions as Record<string, ProcessedItem>;
