@@ -89,3 +89,7 @@ The following categories are available in the `tokens` and `semanticTokens` obje
 - `opacity`
 - `zIndex`
 - `cursor`
+
+## Built-in Default Theme
+
+MailCSS includes a robust default theme right out of the box containing comprehensive options for colours, sizes, scales, and radiuses. Learn more about it in the [Default Theme Reference](./default-theme.md).
