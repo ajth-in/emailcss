@@ -21,19 +21,40 @@ export class CanIEmailMapsBuilder {
     return this;
   }
 
+  private isUnit(slug: string): boolean {
+    return slug.startsWith("css-unit-") && slug !== "css-unit-calc";
+  }
+
+  private isFunction(slug: string, title: string): boolean {
+    return (
+      slug.startsWith("css-function-") ||
+      slug === "css-unit-calc" ||
+      slug === "css-linear-gradient" ||
+      title.endsWith("()")
+    );
+  }
+
+  private isPseudo(slug: string): boolean {
+    return slug.includes("-pseudo-");
+  }
+
+  private isAtRule(title: string): boolean {
+    return title.startsWith("@");
+  }
+
+  private isValue(title: string, isPseudo: boolean): boolean {
+    return title.includes(":") && !isPseudo;
+  }
+
   private processItem(item: CanIEmailItem): void {
     const title = item.title.trim();
     const slug = item.slug;
 
-    const isUnit = slug.startsWith("css-unit-") && slug !== "css-unit-calc";
-    const isFunction =
-      slug.startsWith("css-function-") ||
-      slug === "css-unit-calc" ||
-      slug === "css-linear-gradient" ||
-      title.endsWith("()");
-    const isPseudo = slug.includes("-pseudo-");
-    const isAtRule = title.startsWith("@");
-    const isValue = title.includes(":") && !isPseudo;
+    const isUnit = this.isUnit(slug);
+    const isFunction = this.isFunction(slug, title);
+    const isPseudo = this.isPseudo(slug);
+    const isAtRule = this.isAtRule(title);
+    const isValue = this.isValue(title, isPseudo);
 
     let cleanTitle = title;
     if (isUnit) {
